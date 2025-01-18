@@ -1,0 +1,1 @@
+# Arslanova_skypro_diploma_work
