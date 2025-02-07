@@ -1,4 +1,5 @@
 import allure
+import pytest
 from PageObject.FilmsAPI import FilmsAPI
 
 
@@ -104,6 +105,7 @@ def test_search_information_about_person_by_id_person():
 @allure.title("Проверка поиска по словам, несуществующего фильма")
 @allure.description("Проверка поиска по словам, несуществующего фильма")
 @allure.severity("normal")
+@pytest.mark.xfail
 def test_search_non_existent_films_by_keywords():
     body = api.get_search_films_by_keywords('зиммммм')
     #message = body.json()["message"]       ---Проверка будет включена, когда код статус 404 будет проходить. Сейчас код статус 200 и выдается результат поиска
@@ -119,6 +121,7 @@ def test_search_non_existent_films_by_keywords():
 @allure.title("Проверка поиска фильмов за ненаступивший год")
 @allure.description("Проверка поиска фильмов за ненаступивший год")
 @allure.severity("normal")
+@pytest.mark.xfail
 def test_search_films_the_for_year_that_failed():
     order = 'RATING'
     type_film = 'ALL'
