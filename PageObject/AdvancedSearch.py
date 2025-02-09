@@ -73,7 +73,7 @@ class AdvancedSearch:
 
 
     @allure.step("Заполнить поля в блоке 'Искать фильм по создателям:'")
-    def fill_block_search_for_by_creators_boxs(self, type_person: str, text_to_search: str, person: str)  -> None:
+    def fill_block_search_for_by_creators_boxs(self, type_person: str, text_to_search: str, person: str):
         """
         Эта функция заполняет поля в блоке "Искать фильм по создателям:"
         """
@@ -84,6 +84,8 @@ class AdvancedSearch:
         with allure.step("Нажать на второе поле в первой строке и ввести значение {text_to_search} для поиска в выпадающем списке"):
             self.driver.find_element(*self.block_search_for_by_creators_field_input_box).send_keys(text_to_search)
             dropdown_item = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(f"{self.block_search_for_by_creators_field_input_box_dropdown_locator}[text()='{person}']"))
+                EC.element_to_be_clickable((
+                    By.XPATH, f"{self.block_search_for_by_creators_field_input_box_dropdown_locator}"
+                              f"//*[text()='{person}']")))
         with allure.step("Нажать на значение {person} в результате поиска в выпадающем списке поля"):
             dropdown_item.click()

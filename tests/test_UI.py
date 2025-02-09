@@ -31,7 +31,6 @@ def test_authorization():
 def test_search_bar_positive():
     driver = webdriver.Chrome()
     authorization = Authorization(driver)
-    authorization.authorization(login, password)
     main_page = MainPage(driver)
     text = main_page.search_bar_positive('след')
     with allure.step("Проверить, что в результате поиска отображен текст 'Возможно, вы искали'"):
@@ -49,7 +48,6 @@ def test_search_bar_positive():
 def test_search_bar_negative():
     driver = webdriver.Chrome()
     authorization = Authorization(driver)
-    authorization.authorization(login, password)
     main_page = MainPage(driver)
     text = main_page.search_bar_negative('следрерп')
     with allure.step("Проверить, что в результате поиска отображен текст 'По вашему запросу ничего не найдено'"):
@@ -67,7 +65,6 @@ def test_search_bar_negative():
 def test_advanced_search_name_of_film_positive():
     driver = webdriver.Chrome()
     authorization = Authorization(driver)
-    authorization.authorization(login, password)
     main_page = MainPage(driver)
     main_page.open_advanced_search()
     advanced_search = AdvancedSearch(driver)
@@ -93,7 +90,6 @@ def test_advanced_search_name_of_film_positive():
 def test_advanced_search_name_of_film_negative():
     driver = webdriver.Chrome()
     authorization = Authorization(driver)
-    authorization.authorization(login, password)
     main_page = MainPage(driver)
     main_page.open_advanced_search()
     advanced_search = AdvancedSearch(driver)
@@ -119,7 +115,6 @@ def test_advanced_search_name_of_film_negative():
 def test_advanced_search_genre_positive():
     driver = webdriver.Chrome()
     authorization = Authorization(driver)
-    authorization.authorization(login, password)
     main_page = MainPage(driver)
     main_page.open_advanced_search()
     advanced_search = AdvancedSearch(driver)
@@ -145,7 +140,6 @@ def test_advanced_search_genre_positive():
 def test_advanced_search_genre_and_country_positive():
     driver = webdriver.Chrome()
     authorization = Authorization(driver)
-    authorization.authorization(login, password)
     main_page = MainPage(driver)
     main_page.open_advanced_search()
     advanced_search = AdvancedSearch(driver)
@@ -172,7 +166,6 @@ def test_advanced_search_genre_and_country_positive():
 def test_advanced_search_by_creators_positive():
     driver = webdriver.Chrome()
     authorization = Authorization(driver)
-    authorization.authorization(login, password)
     main_page = MainPage(driver)
     main_page.open_advanced_search()
     advanced_search = AdvancedSearch(driver)
