@@ -160,7 +160,7 @@ def test_advanced_search_genre_and_country_positive():
 @allure.story("UI")
 @allure.feature("Поиск")
 @allure.epic("Позитивная")
-@allure.title("Проверка расширенного поиска актера/режиссера/сценариста/")
+@allure.title("Проверка расширенного поиска актера/режиссера/сценариста/...")
 @allure.description("Проверка расширенного поиска актера/режиссера/сценариста/ в блоке 'Искать актера/режиссера/сценариста/...'")
 @allure.severity("normal")
 def test_advanced_search_by_creators_positive():
@@ -171,7 +171,7 @@ def test_advanced_search_by_creators_positive():
     advanced_search = AdvancedSearch(driver)
     advanced_search.fill_block_search_for_an_actor_director_screenwriter_first_name_or_last_name('игорь')
     text = advanced_search.click_block_search_for_an_actor_director_screenwriter_button()
-    with allure.step("Проверить, что в результате поиска количество найденных фильмов больше 0"):
+    with allure.step("Проверить, что в результате поиска количество найденных актеров/режиссеров/сценаристов/... больше 0"):
         match = re.search(r'результаты: (\d+)', text)
         if match:
             result_count = int(match.group(1))
