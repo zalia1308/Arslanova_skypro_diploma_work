@@ -16,10 +16,8 @@ class AdvancedSearch:
         self.block_search_for_a_movie_field_name_of_film = (By.XPATH, "//*[contains(@class, 'text el_1')]")
         self.block_search_for_a_movie_field_genre = (By.XPATH, "//*[contains(@class, 'text el_6 __genreSB__')]")
         self.block_search_for_a_movie_field_country = (By.XPATH, "//*[contains(@class, 'text el_5 __countrySB__')]")
-        self.block_search_for_by_creators_button_search = (By.XPATH, "//*[contains(@id, 'btn_search_6')]")
-        self.block_search_for_by_creators_field_type = (By.XPATH, "//*[contains(@id, 'cr_search_field_1_select')]")
-        self.block_search_for_by_creators_field_input_box = (By.XPATH, "//*[contains(@id, 'cr_search_field_1')]")
-        self.block_search_for_by_creators_field_input_box_dropdown_locator = (By.XPATH, "//*[contains(@class, 'ui - menu - item')]")
+        self.block_search_for_an_actor_director_screenwriter_button_search = (By.XPATH, "//*[contains(@class, 'el_8 submit nice_button')]")
+        self.block_search_for_an_actor_director_screenwriter_first_name_or_last_name = (By.XPATH, "//*[contains(@id, 'find_people')]")
 
 
     @allure.step("Нажать кнопку 'Поиск' в блоке 'Искать фильм:'")
@@ -61,31 +59,20 @@ class AdvancedSearch:
         select.select_by_visible_text(country)
 
 
-    @allure.step("Нажать кнопку 'Поиск' в блоке 'Искать фильм по создателям:'")
-    def click_block_search_by_creators_button(self):
+    @allure.step("Нажать кнопку 'Поиск' в блоке 'Искать актера/режиссера/сценариста/...'")
+    def click_block_search_for_an_actor_director_screenwriter_button(self):
         """
-        Эта функция нажимает кнопку "Поиск" в блоке "Искать фильм по создателям:" и возвращает из результата поиска часть текста в формате "поиск: <зим> • результаты: <1429>"
+        Эта функция нажимает кнопку "Поиск" в блоке "Искать актера/режиссера/сценариста/..." и возвращает из результата поиска часть текста в формате "поиск: <зим> • результаты: <1429>"
         """
-        self.driver.find_element(*self.block_search_for_by_creators_button_search).click()
+        self.driver.find_element(*self.block_search_for_an_actor_director_screenwriter_button_search).click()
         self.driver.implicitly_wait(10)
         text = self.driver.find_element(*self.search_results).text
         return text
 
 
-    @allure.step("Заполнить поля в блоке 'Искать фильм по создателям:'")
-    def fill_block_search_for_by_creators_boxs(self, type_person: str, text_to_search: str, person: str):
+    @allure.step("Заполнить поле 'имя/фамилия' в блоке 'Искать актера/режиссера/сценариста/...'")
+    def fill_block_search_for_an_actor_director_screenwriter_first_name_or_last_name(self, first_name_or_last_name: str)  -> None:
         """
-        Эта функция заполняет поля в блоке "Искать фильм по создателям:"
+        Эта функция заполняет поле 'имя/фамилия' в блоке "Искать актера/режиссера/сценариста/..."
         """
-        with allure.step("Нажать на первое поле в первой строке и выбрать значение {type_person}"):
-            dropdown_element = self.driver.find_element(*self.block_search_for_by_creators_field_type)
-            select = Select(dropdown_element)
-            select.select_by_visible_text(type_person)
-        with allure.step("Нажать на второе поле в первой строке и ввести значение {text_to_search} для поиска в выпадающем списке"):
-            self.driver.find_element(*self.block_search_for_by_creators_field_input_box).send_keys(text_to_search)
-            dropdown_item = WebDriverWait(self.driver, 10).until(
-                EC.element_to_be_clickable((
-                    By.XPATH, f"{self.block_search_for_by_creators_field_input_box_dropdown_locator}"
-                              f"//*[text()='{person}']")))
-        with allure.step("Нажать на значение {person} в результате поиска в выпадающем списке поля"):
-            dropdown_item.click()
+        self.driver.find_element(*self.block_search_for_an_actor_director_screenwriter_first_name_or_last_name).send_keys(first_name_or_last_name)
